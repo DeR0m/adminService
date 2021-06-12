@@ -1,4 +1,7 @@
 package com.example.adminService.service;
 
-public class AdminService {
+
+public interface AdminService {
+
+
 }
