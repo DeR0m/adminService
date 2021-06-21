@@ -22,6 +22,15 @@ public class HotelController {
         }
     }
 
+    @GetMapping("/filter")
+    public ResponseEntity filterByTag(@RequestParam(required = false, defaultValue = "") String filter){
+        try {
+            return ResponseEntity.ok(hotelService.filterByTag(filter));
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body("Произошла ошибка");
+        }
+    }
+
     @PostMapping
     public ResponseEntity create(@RequestBody Hotels hotels) {
         try {

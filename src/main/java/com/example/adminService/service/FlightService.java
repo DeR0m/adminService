@@ -25,6 +25,18 @@ public class FlightService {
         return flightsRepo.save(flightsForDb);
     }
 
+    public Iterable<Flights> filterByTag(String filter){
+        Iterable<Flights> flights = flightsRepo.findAll();
+
+        if(filter != null && !filter.isEmpty()){
+            flights = flightsRepo.findByTag(filter);
+        }else {
+            flights = flightsRepo.findAll();
+        }
+
+        return flights;
+    }
+
     public Long delete(Long id) {
         flightsRepo.deleteById(id);
         return id;
