@@ -20,9 +20,9 @@ public class AdminController {
         }
     }
 
-    //Есть проблемка
+
     @GetMapping("/username")
-    public ResponseEntity getOneUser(@RequestParam String username) {
+    public ResponseEntity getOneUser(@RequestParam(required = false, defaultValue = "")  String username) {
         try {
             return ResponseEntity.ok(adminService.findUsername(username));
         } catch (Exception e) {
