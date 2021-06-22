@@ -25,12 +25,12 @@ public class HotelService {
         return hotelsRepo.save(hotelsForDb);
     }
 
-    public Iterable<Hotels> filterByTag(String filter){
+    public Iterable<Hotels> filterByTag(String filter) {
         Iterable<Hotels> hotels = hotelsRepo.findAll();
 
-        if(filter != null && !filter.isEmpty()){
+        if (filter != null && !filter.isEmpty()) {
             hotels = hotelsRepo.findByTag(filter);
-        }else{
+        } else {
             hotels = hotelsRepo.findAll();
         }
 

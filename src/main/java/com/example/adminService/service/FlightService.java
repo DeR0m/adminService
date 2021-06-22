@@ -25,12 +25,12 @@ public class FlightService {
         return flightsRepo.save(flightsForDb);
     }
 
-    public Iterable<Flights> filterByTag(String filter){
+    public Iterable<Flights> filterByTag(String filter) {
         Iterable<Flights> flights = flightsRepo.findAll();
 
-        if(filter != null && !filter.isEmpty()){
+        if (filter != null && !filter.isEmpty()) {
             flights = flightsRepo.findByTag(filter);
-        }else {
+        } else {
             flights = flightsRepo.findAll();
         }
 

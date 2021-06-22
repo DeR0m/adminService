@@ -23,10 +23,10 @@ public class FlightController {
     }
 
     @GetMapping("/filter")
-    public ResponseEntity filterByTag(@RequestParam(required = false, defaultValue = "") String filter){
+    public ResponseEntity filterByTag(@RequestParam(required = false, defaultValue = "") String filter) {
         try {
             return ResponseEntity.ok(flightService.filterByTag(filter));
-        }catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.badRequest().body("Произошла ошибка при поиски записи");
         }
     }
