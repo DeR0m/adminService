@@ -5,6 +5,7 @@ import com.example.adminService.exceptions.UserNotFoundException;
 import com.example.adminService.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -15,6 +16,7 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
     public ResponseEntity getUser() {
         try {
@@ -24,7 +26,7 @@ public class AdminController {
         }
     }
 
-
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/username")
     public ResponseEntity getOneUser(@RequestParam(required = false, defaultValue = "") String username) {
         try {
@@ -37,12 +39,12 @@ public class AdminController {
     }
 
     //Надо смотреть запрос
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/edit/{user}")
     public ResponseEntity editProfile(
             @PathVariable String username,
             @PathVariable User user,
             @RequestParam Map<String, String> form
-
     ) {
         try {
             return ResponseEntity.ok(adminService.editProfile(user, username, form));
@@ -51,6 +53,7 @@ public class AdminController {
         }
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity deleteUser(@PathVariable Long id) {
         try {

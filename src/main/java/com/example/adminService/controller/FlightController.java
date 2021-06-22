@@ -4,6 +4,7 @@ import com.example.adminService.domain.Flights;
 import com.example.adminService.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,6 +14,7 @@ public class FlightController {
     @Autowired
     private FlightService flightService;
 
+    @PreAuthorize("hasAuthority('ADMIN') or hasRole('TOUROPERATOR')")
     @GetMapping
     public ResponseEntity getFlights() {
         try {
@@ -22,6 +24,7 @@ public class FlightController {
         }
     }
 
+    @PreAuthorize("hasAuthority('ADMIN') or hasRole('TOUROPERATOR')")
     @GetMapping("/filter")
     public ResponseEntity filterByTag(@RequestParam(required = false, defaultValue = "") String filter) {
         try {
@@ -31,6 +34,7 @@ public class FlightController {
         }
     }
 
+    @PreAuthorize("hasAuthority('ADMIN') or hasRole('TOUROPERATOR')")
     @PostMapping
     public ResponseEntity create(@RequestBody Flights flights) {
         try {
@@ -41,6 +45,7 @@ public class FlightController {
         }
     }
 
+    @PreAuthorize("hasAuthority('ADMIN') or hasRole('TOUROPERATOR')")
     @PutMapping("/{id}")
     public ResponseEntity update(@PathVariable("id") Flights flightsForDb,
                                  @RequestBody Flights flights) {
@@ -52,6 +57,7 @@ public class FlightController {
         }
     }
 
+    @PreAuthorize("hasAuthority('ADMIN') or hasRole('TOUROPERATOR')")
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Long id) {
         try {

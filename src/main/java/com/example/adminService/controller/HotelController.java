@@ -4,6 +4,7 @@ import com.example.adminService.domain.Hotels;
 import com.example.adminService.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,6 +14,7 @@ public class HotelController {
     @Autowired
     private HotelService hotelService;
 
+    @PreAuthorize("hasAuthority('ADMIN') or hasRole('TOUROPERATOR')")
     @GetMapping
     public ResponseEntity getHotels() {
         try {
@@ -22,6 +24,7 @@ public class HotelController {
         }
     }
 
+    @PreAuthorize("hasAuthority('ADMIN') or hasRole('TOUROPERATOR')")
     @GetMapping("/filter")
     public ResponseEntity filterByTag(@RequestParam(required = false, defaultValue = "") String filter) {
         try {
@@ -31,6 +34,7 @@ public class HotelController {
         }
     }
 
+    @PreAuthorize("hasAuthority('ADMIN') or hasRole('TOUROPERATOR')")
     @PostMapping
     public ResponseEntity create(@RequestBody Hotels hotels) {
         try {
@@ -41,6 +45,7 @@ public class HotelController {
         }
     }
 
+    @PreAuthorize("hasAuthority('ADMIN') or hasRole('TOUROPERATOR')")
     @PutMapping("/{id}")
     public ResponseEntity update(@PathVariable("id") Hotels hotelsForDb,
                                  @RequestBody Hotels hotels) {
@@ -52,6 +57,7 @@ public class HotelController {
         }
     }
 
+    @PreAuthorize("hasAuthority('ADMIN') or hasRole('TOUROPERATOR')")
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Long id) {
         try {
